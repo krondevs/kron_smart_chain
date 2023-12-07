@@ -17,19 +17,19 @@ El protocolo de consenso basado en la prueba de contribución de Kron Smart Chai
 
 Criptoactivos de la red Los criptoactivos son tokens que los usuarios del protocolo Kron pueden emitir sin necesidad de extraerlos. Los usuarios del protocolo Kron crean estos activos y deciden su propósito y reglas independientemente del protocolo. Estos activos o tokens existen en la cadena de bloques de Kron y podrían tener cualquier nombre, denominación o propósito seleccionado por los creadores de cada activo, moneda o ficha. Los tokens son transferibles y se mueven con la misma facilidad que bitcoin u otras criptomonedas que funcionan de manera similar. En Kron, un activo es solo una cantidad limitada de un símbolo único y transferible a cualquier Dirección de Kron. Los activos creados en el protocolo Kron tienen varias ventajas: son más fáciles de usar, están estrechamente integrados con una moneda nativa y están asegurados por un protocolo de consenso validador seguro y estable de Prueba de Contribución la cual se ejecuta en la comunidad de usuarios.
 
-# Los estandares de token
+## Los estandares de token
 
-## kr10: Token principal, (el más común)
+### kr10: Token principal, (el más común)
 
-## kr12: Subtoken (respaldado por el token kr10)
+### kr12: Subtoken (respaldado por el token kr10)
 
-## kr5: Token NFT (respaldado por un token kr10)
+### kr5: Token NFT (respaldado por un token kr10)
 
-## kr17: Activo calificado especial
+### kr17: Activo calificado especial
 
-## kr18: Subactivo calificado (Respaldado por un kr17)
+### kr18: Subactivo calificado (Respaldado por un kr17)
 
-## kr23: Criptoactivo Restringido especial (Evita la Ligitimación de Capitales)
+### kr23: Criptoactivo Restringido especial (Evita la Ligitimación de Capitales)
 
 Al momento de la creación de los criptoactivos en la Red Kron se generan 3 transacciones:
 
@@ -82,12 +82,12 @@ Una transacción está compuesta de entradas y salidas. El conjunto de entradas 
 
 Kron Smart Chain es un sistema electrónico peer to peer para la creación y transferencia de activos digitales, basado en el código Bitcoin. Utiliza un protocolo de consenso basado en la prueba de contribución para recompensar a los nodos por mantener la red sincronizada y conectada. Ofrece una solución integral para las necesidades empresariales, con un protocolo de consenso avanzado, resistencia a la censura y un enfoque en la privacidad a través del modelo UTXO. Con estas características, esta cadena de bloques es una opción ideal para empresas de diferentes industrias que buscan mejorar la seguridad, confiabilidad y privacidad en sus operaciones. Podría tener aplicaciones en diversos sectores, incluyendo bienes raíces, arte, finanzas, logística, atención médica, entre otros. Por ejemplo:
 
-## En el sector inmobiliario, los activos inmobiliarios pueden ser tokenizados para facilitar la inversión y la propiedad fraccionada.
+### En el sector inmobiliario, los activos inmobiliarios pueden ser tokenizados para facilitar la inversión y la propiedad fraccionada.
 
-## En el sector del arte, las obras de arte pueden ser representadas digitalmente y transferidas de manera segura y transparente.
+### En el sector del arte, las obras de arte pueden ser representadas digitalmente y transferidas de manera segura y transparente.
 
-## En el sector financiero, la tokenización de activos permite una mayor liquidez y acceso a inversiones antes inaccesibles.
+### En el sector financiero, la tokenización de activos permite una mayor liquidez y acceso a inversiones antes inaccesibles.
 
-## En la logística, la cadena de bloques puede utilizarse para rastrear y verificar la autenticidad de productos en toda la cadena de suministro.
+### En la logística, la cadena de bloques puede utilizarse para rastrear y verificar la autenticidad de productos en toda la cadena de suministro.
 
-## En la atención médica, la cadena de bloques puede utilizarse para garantizar la seguridad y privacidad de los datos del paciente.
+### En la atención médica, la cadena de bloques puede utilizarse para garantizar la seguridad y privacidad de los datos del paciente.
