@@ -1,7 +1,7 @@
 # Kron Smart Chain
 ## Introducción
 
-Kron (Kron) Un sistema electrónico peer to peer para la Creación y transferencia de activos. Basado en el extenso desarrollo y prueba del Modelo UTXO del protocolo Bitcoin, Kron se basa en una bifurcación del código Bitcoin. Tiene como objetivo priorizar la seguridad, el control del usuario, la privacidad y Resistencia a la censura. Está abierto a su uso y desarrollo en cualquier jurisdicción, al tiempo que permite funciones adicionales simples para los usuarios según sus necesidades.
+Kron (Kron) Un sistema electrónico peer to peer para la Creación y transferencia de activos. Basado en el extenso desarrollo y prueba del Modelo UTXO del protocolo Bitcoin, el sistema utiliza base de datos relacional. Tiene como objetivo priorizar la seguridad, el control del usuario, la privacidad y Resistencia a la censura. Está abierto a su uso y desarrollo en cualquier jurisdicción, al tiempo que permite funciones adicionales simples para los usuarios según sus necesidades.
 
 Es una blockchain descentralizada y está diseñada específicamente para la creación y transferencia de activos digitales, tokenización del mundo real, y almacenamiento seguro de información y metadatos de archivos. Kron Smart Chain ha sido desarrollada para satisfacer las necesidades de diversos sectores, desde corporaciones hasta empresas financieras, y presenta una red completamente descentralizada y altamente eficiente.
 
