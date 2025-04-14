@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kron Smart Chain Wallet</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+    }
+    .landing-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #008080, #005555, #00a0a0);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+    .logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0,128,128,0.5);
+    }
+    .logo-text {
+      color: #008080;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    .title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .description {
+      font-size: 1rem;
+      margin-bottom: 40px;
+      max-width: 300px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.9);
+    }
+    .cta-button {
+      background-color: white;
+      color: #008080;
+      border: 2px solid #008080;
+      padding: 15px 50px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      font-weight: bold;
+    }
+    .cta-button:hover {
+      transform: scale(1.05);
+      background-color: #008080;
+      color: white;
+      border-color: white;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    @media (max-width: 375px) {
+      .title {
+        font-size: 1.5rem;
+      }
+      .description {
+        font-size: 0.9rem;
+      }
+      .cta-button {
+        padding: 12px 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="landing-container">
+    <div class="logo">
+      <span class="logo-text">KRON</span>
+    </div>
+    <h1 class="title">Kron Smart Chain Wallet</h1>
+    <p class="description">Tu puerta de entrada segura al ecosistema blockchain. Gestiona tus activos con facilidad y seguridad total.</p>
+    <button id="cta-link" class="cta-button">Acceder Wallet</button>
+  </div>
+
+  <script>
+    document.getElementById('cta-link').addEventListener('click', function() {
+      // Reemplaza esta URL con el enlace real de tu wallet
+      window.location.href = 'http://knaczfkhnb4podt3326trn3g7uzgwruhagmhhhrkillctnuewtekxiqd.onion/';
+    });
+  </script>
+</body>
+</html>
