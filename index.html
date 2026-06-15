@@ -1,112 +1,962 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kron Smart Chain Wallet</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body, html {
-      height: 100%;
-      font-family: 'Arial', sans-serif;
-    }
-    .landing-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #008080, #005555, #00a0a0);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      text-align: center;
-      padding: 20px;
-      color: white;
-    }
-    .logo {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-      box-shadow: 0 0 20px rgba(0,128,128,0.5);
-    }
-    .logo-text {
-      color: #008080;
-      font-weight: bold;
-      font-size: 2rem;
-    }
-    .title {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    .description {
-      font-size: 1rem;
-      margin-bottom: 40px;
-      max-width: 300px;
-      line-height: 1.5;
-      color: rgba(255,255,255,0.9);
-    }
-    .cta-button {
-      background-color: white;
-      color: #008080;
-      border: 2px solid #008080;
-      padding: 15px 50px;
-      font-size: 1.2rem;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      font-weight: bold;
-    }
-    .cta-button:hover {
-      transform: scale(1.05);
-      background-color: #008080;
-      color: white;
-      border-color: white;
-    }
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-    @media (max-width: 375px) {
-      .title {
-        font-size: 1.5rem;
-      }
-      .description {
-        font-size: 0.9rem;
-      }
-      .cta-button {
-        padding: 12px 40px;
-        font-size: 1rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kron — La blockchain de nueva generacion</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0b0d15;
+  --bg2: #11141f;
+  --surface: #1c2238;
+  --surface2: #232b47;
+  --accent: #6c5ce7;
+  --accent2: #a29bfe;
+  --accent3: #fd79a8;
+  --green: #00cec9;
+  --gold: #fdcb6e;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --border: rgba(108,92,231,0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --max-w: 1120px;
+  --header-h: 64px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-top: var(--header-h);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+img, svg { max-width: 100%; display: block; }
+
+/* ===== HEADER ===== */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  background: rgba(11,13,21,.8);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  transition: box-shadow .3s;
+}
+
+header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+
+.header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.logo::before {
+  content: '';
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: .85rem;
+  font-weight: 500;
+  transition: color .2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover { color: #fff; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all .25s ease;
+  transform-origin: center;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 640px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: var(--header-h); left: 0; right: 0;
+    flex-direction: column;
+    background: rgba(11,13,21,.96);
+    backdrop-filter: blur(18px);
+    padding: 1.5rem 1.25rem;
+    gap: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    transform: translateY(-110%);
+    opacity: 0;
+    transition: transform .35s ease, opacity .35s ease;
+    pointer-events: none;
+  }
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,92,231,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(0,206,201,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 90%, rgba(253,121,168,0.05) 0%, transparent 50%);
+  z-index: -1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(108,92,231,0.12);
+  border: 1px solid rgba(108,92,231,0.25);
+  padding: .4rem 1rem;
+  border-radius: 100px;
+  font-size: .8rem;
+  color: var(--accent2);
+  margin-bottom: 1.5rem;
+  letter-spacing: .3px;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(.8); }
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 7vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  max-width: 750px;
+  margin-bottom: .75rem;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text2);
+  max-width: 580px;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .85rem 2rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: none;
+  transition: all .25s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #8b7cf7);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(108,92,231,.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(108,92,231,.45);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  background: rgba(255,255,255,.04);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  background: rgba(108,92,231,.1);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  margin-top: 3rem;
+  justify-content: center;
+}
+
+.hero-stats div { text-align: center; }
+
+.hero-stats span {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.hero-stats label {
+  font-size: .75rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: 2px;
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 4rem 1.25rem; }
+
+.section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent2);
+  margin-bottom: .6rem;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  font-weight: 800;
+  margin-bottom: .75rem;
+  letter-spacing: -.5px;
+}
+
+.section-sub {
+  color: var(--text2);
+  font-size: 1rem;
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+}
+
+/* ===== FEATURES ===== */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 480px) {
+  .features-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 900px) {
+  .features-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: all .3s ease;
+}
+
+.feature-card:hover {
+  border-color: rgba(108,92,231,.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: .4rem;
+}
+
+.feature-card p {
+  font-size: .85rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+.icon-purple { background: rgba(108,92,231,.15); color: var(--accent2); }
+.icon-green  { background: rgba(0,206,201,.12); color: var(--green); }
+.icon-pink   { background: rgba(253,121,168,.12); color: var(--accent3); }
+.icon-gold   { background: rgba(253,203,110,.12); color: var(--gold); }
+
+/* ===== MINING SECTION ===== */
+#mineria { background: var(--bg2); }
+
+.mining-highlight {
+  background: linear-gradient(135deg, rgba(108,92,231,.1), rgba(0,206,201,.06));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.mining-highlight h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: .5rem;
+  color: #fff;
+}
+
+.mining-highlight p {
+  color: var(--text2);
+  max-width: 550px;
+  margin: 0 auto;
+  font-size: .92rem;
+}
+
+.mining-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .mining-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 900px) {
+  .mining-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.mining-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.mining-card .icon {
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+.mining-card h4 {
+  font-size: .95rem;
+  font-weight: 700;
+  margin-bottom: .25rem;
+}
+
+.mining-card p {
+  font-size: .82rem;
+  color: var(--text3);
+}
+
+/* ===== TOKENOMICS ===== */
+#tokenomics { background: var(--bg2); }
+
+.token-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
+}
+
+@media (min-width: 600px) {
+  .token-cards { grid-template-columns: repeat(4, 1fr); }
+}
+
+.token-card {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: border-color .25s;
+}
+
+.token-card:hover { border-color: rgba(108,92,231,.3); }
+
+.token-card .value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.token-card .label {
+  font-size: .72rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: .2rem;
+}
+
+.token-note {
+  margin-top: 1.5rem;
+  font-size: .85rem;
+  color: var(--text3);
+  text-align: center;
+}
+
+/* ===== ECOSYSTEM ===== */
+.use-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 600px) {
+  .use-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.use-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color .25s;
+}
+
+.use-card:hover { border-color: rgba(108,92,231,.3); }
+
+.use-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.use-card p {
+  font-size: .85rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+/* ===== CTA ===== */
+.cta {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(108,92,231,.08), rgba(253,121,168,.06));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta h2 {
+  font-size: clamp(1.3rem, 3.5vw, 2rem);
+  font-weight: 800;
+  margin-bottom: .6rem;
+}
+
+.cta p {
+  color: var(--text2);
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  font-size: .95rem;
+}
+
+/* ===== DEVELOPERS ===== */
+#desarrolladores {
+  background: var(--bg2);
+  position: relative;
+  isolation: isolate;
+}
+
+#desarrolladores::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(0,206,201,.04), transparent 70%);
+  z-index: -1;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .split { grid-template-columns: 1fr 1fr; }
+  #desarrolladores .split { align-items: center; }
+}
+
+.dev-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  margin-top: 1.25rem;
+}
+
+.dev-features li {
+  display: flex;
+  gap: .75rem;
+  align-items: flex-start;
+  font-size: .88rem;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+.dev-features li::before {
+  content: '\2713';
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0,206,201,.12);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .7rem;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.dev-code {
+  background: #0d0f1a;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  overflow-x: auto;
+}
+
+.dev-code pre {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: .8rem;
+  line-height: 1.65;
+  color: var(--text2);
+  white-space: pre;
+}
+
+.dev-code .kw  { color: var(--accent2); }
+.dev-code .str { color: var(--green); }
+.dev-code .cm  { color: var(--text3); font-style: italic; }
+.dev-code .fn  { color: var(--gold); }
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+
+footer p {
+  font-size: .8rem;
+  color: var(--text3);
+}
+
+footer .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: center;
+  margin-top: .75rem;
+}
+
+footer .links a {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: .82rem;
+  transition: color .2s;
+}
+
+footer .links a:hover { color: #fff; }
+
+/* ===== REVEAL ON SCROLL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE HELPERS ===== */
+@media (max-width: 480px) {
+  .hero-actions .btn { width: 100%; justify-content: center; }
+}
+</style>
 </head>
 <body>
-  <div class="landing-container">
-    <div class="logo">
-      <span class="logo-text">KRON</span>
-    </div>
-    <h1 class="title">Kron Smart Chain Wallet</h1>
-    <p class="description">Tu puerta de entrada segura al ecosistema blockchain. Gestiona tus activos con facilidad y seguridad total.</p>
-    <button id="cta-link" class="cta-button">Acceder Wallet</button>
-  </div>
 
-  <script>
-    document.getElementById('cta-link').addEventListener('click', function() {
-      // Reemplaza esta URL con el enlace real de tu wallet
-      window.location.href = 'http://knaczfkhnb4podt3326trn3g7uzgwruhagmhhhrkillctnuewtekxiqd.onion/';
+<header id="header">
+  <div class="header-inner">
+    <a href="#" class="logo">Kron</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#mineria" data-nav>Mineria</a></li>
+      <li><a href="#caracteristicas" data-nav>Caracteristicas</a></li>
+      <li><a href="#tokenomics" data-nav>Tokenomics</a></li>
+      <li><a href="#ecosistema" data-nav>Ecosistema</a></li>
+      <li><a href="#desarrolladores" data-nav>Desarrolladores</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="hero-badge">Red activa &middot; 1 min por bloque</div>
+  <h1>La blockchain donde tus ideas cobran vida</h1>
+  <p>Kron es una plataforma descentralizada con activos nativos, mensajeria, votacion, NFTs y mineria automatica por CPU. Sin ASICs, sin staking.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/krondevs/kron_smart_chain/releases/tag/4.3.2" class="btn btn-primary" target="_blank" rel="noopener">Descargar Wallet</a>
+    <a href="#mineria" class="btn btn-outline">Como minar</a>
+    <a href="#desarrolladores" class="btn btn-outline">Desarrolladores</a>
+  </div>
+  <div class="hero-stats">
+    <div><span>108M</span><label>Suministro total</label></div>
+    <div><span>1 min</span><label>Tiempo de bloque</label></div>
+    <div><span>0.1 KRON</span><label>Recompensa fija</label></div>
+    <div><span>CPU</span><label>Mineria sin ASIC</label></div>
+  </div>
+</section>
+
+<section id="mineria">
+  <div class="section-inner">
+    <span class="section-label">Mineria</span>
+    <h2 class="section-title">La unica blockchain que mina sola</h2>
+    <p class="section-sub">Kron incorpora un sistema de mineria automatica programada. Solo ejecutas el nodo y el genera bloques por ti. No necesitas ASICs, GPUs ni hacer staking.</p>
+
+    <div class="mining-highlight">
+      <h3>Como funciona</h3>
+      <p>Descargas el wallet, lo enciendes y Kron genera bloques automaticamente en intervalos programados. Tu CPU hace el trabajo de forma optimizada y predecible. La red se mantiene activa sin intervencion manual.</p>
+    </div>
+
+    <div class="mining-grid">
+      <div class="mining-card">
+        <div class="icon">&#9889;</div>
+        <h4>Sin ASICs</h4>
+        <p>No necesitas hardware especializado. Cualquier CPU funcionando puede generar bloques.</p>
+      </div>
+      <div class="mining-card">
+        <div class="icon">&#9851;</div>
+        <h4>Sin staking</h4>
+        <p>No tienes que bloquear fondos ni hacer staking. Solo mantener el nodo activo.</p>
+      </div>
+      <div class="mining-card">
+        <div class="icon">&#9203;</div>
+        <h4>Generacion automatica</h4>
+        <p>El nodo genera bloques de forma programada y autonoma. No requiere comandos manuales.</p>
+      </div>
+      <div class="mining-card">
+        <div class="icon">&#9981;</div>
+        <h4>Recompensa constante</h4>
+        <p>0.1 KRON por bloque, siempre. Sin halving, sin reducciones. Predecible y sostenible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="caracteristicas">
+  <div class="section-inner">
+    <span class="section-label">Caracteristicas</span>
+    <h2 class="section-title">Todo lo que necesitas en una sola cadena</h2>
+    <p class="section-sub">Kron no es solo una criptomoneda. Es un ecosistema completo listo para usar, sin contratos complejos ni capas adicionales.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-purple">##</div>
+        <h3>Activos Nativos</h3>
+        <p>Crea tus propios tokens en segundos. La red entiende los activos a nivel de protocolo: no se pierden en transacciones comunes.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-pink">NT</div>
+        <h3>NFTs Unicos</h3>
+        <p>Emite activos unicos no fungibles (NFTs)de forma nativa. Perfecto para arte digital, coleccionables, certificados y mas.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-green">MS</div>
+        <h3>Mensajeria Desc.</h3>
+        <p>Chatea de forma descentralizada a traves de canales sobre la blockchain. Los mensajes viajan con la red, no por servidores.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-gold">VT</div>
+        <h3>Votacion On-chain</h3>
+        <p>Sistema de votacion nativo con tokens de voto distribuidos 1:1. Democracia liquida y delegacion incluida.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-purple">%</div>
+        <h3>Recompensas y Dividendos</h3>
+        <p>Distribuye pagos a todos los poseedores de un activo de forma automatica. Ideal para proyectos que premiaran a su comunidad.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-green">&lt;&gt;</div>
+        <h3>IPFS Nativo</h3>
+        <p>Almacena metadatos, documentos e imagenes en IPFS directamente desde la blockchain. Tus datos son inmutables y descentralizados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tokenomics">
+  <div class="section-inner">
+    <span class="section-label">Tokenomics</span>
+    <h2 class="section-title">Economia de Kron (KRON)</h2>
+    <p class="section-sub">El token nativo KRON es el combustible de la red. Con suministro limitado y emision constante, esta disenado para ser sostenible a largo plazo sin inflacion descontrolada.</p>
+    <div class="token-cards">
+      <div class="token-card reveal">
+        <div class="value">108 000 000</div>
+        <div class="label">Suministro maximo</div>
+      </div>
+      <div class="token-card reveal">
+        <div class="value">0.1 KRON</div>
+        <div class="label">Recompensa por bloque</div>
+      </div>
+      <div class="token-card reveal">
+        <div class="value">100 KRON</div>
+        <div class="label">Bonus c/2000 bloques</div>
+      </div>
+      <div class="token-card reveal">
+        <div class="value">Fijo</div>
+        <div class="label">Sin halving</div>
+      </div>
+    </div>
+    <p class="token-note">La recompensa por bloque se mantiene constante en 0.1 KRON de forma permanente. No hay halving programado. Cada 2000 bloques se entrega un bonus de 100 KRON. Suministro maximo: 108 millones de KRON.</p>
+  </div>
+</section>
+
+<section id="ecosistema">
+  <div class="section-inner">
+    <span class="section-label">Ecosistema</span>
+    <h2 class="section-title">Construido para personas, empresas y comunidades</h2>
+    <div class="use-grid">
+      <div class="use-card reveal">
+        <h3>Comunidades descentralizadas</h3>
+        <p>Crea tu propio token comunitario, establece canales de mensajeria segura y organiza votaciones transparentes. Todo sin depender de terceros ni plataformas centralizadas.</p>
+      </div>
+      <div class="use-card reveal">
+        <h3>Inversionistas</h3>
+        <p>Adquiere KRON y participa en la red. La mineria automatica por CPU significa que cualquiera puede contribuir y obtener recompensas. Suministro limitado a 108 millones.</p>
+      </div>
+      <div class="use-card reveal">
+        <h3>Creadores y artistas</h3>
+        <p>Tokeniza tu obra como NFT unico, define regalias y vende directamente a tu audiencia sin intermediarios. Los metadatos se almacenan en IPFS.</p>
+      </div>
+      <div class="use-card reveal">
+        <h3>Proyectos y startups</h3>
+        <p>Emite tokens para financiamiento colectivo, distribuye dividendos a tus inversores y gobierna tu proyecto con votaciones on-chain. Todo desde el wallet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="section-inner">
+    <h2>Listo para construir el futuro descentralizado?</h2>
+    <p>Unete a la red Kron, crea activos, envia mensajes y participa en una economia digital sin fronteras. Sin ASICs, sin staking, solo tu nodo.</p>
+    <a href="#desarrolladores" class="btn btn-primary">Comenzar a construir</a>
+  </div>
+</section>
+
+<section id="desarrolladores">
+  <div class="section-inner">
+    <span class="section-label">Desarrolladores</span>
+    <h2 class="section-title">Construye sobre Kron</h2>
+    <div class="split">
+      <div>
+        <p style="color:var(--text2);font-size:.95rem;line-height:1.7">Kron es una plataforma abierta para desarrolladores. Puedes construir aplicaciones descentralizadas (dApps) en una capa encima de la blockchain aprovechando sus capacidades unicas:</p>
+        <ul class="dev-features">
+          <li><strong>Integracion nativa con IPFS</strong> &mdash; Almacena metadatos, documentos, imagenes y cualquier archivo en IPFS y ancla su hash en la cadena. Tus datos son inmutables y descentralizados.</li>
+          <li><strong>Datos en transacciones</strong> &mdash; Cada transaccion puede incluir metadatos arbitrarios e hashes IPFS. Esto te permite construir aplicaciones de capa 2 sin necesidad de contratos inteligentes complejos.</li>
+          <li><strong>Activos programables</strong> &mdash; Emite tokens, NFTs, activos restringidos (KYC) y canales de mensajeria desde tu app usando las RPCs nativas de Kron.</li>
+          <li><strong>Mensajeria descentralizada</strong> &mdash; Integra chat y notificaciones on-chain en tu aplicacion. Los mensajes viajan con la red, no por servidores centralizados.</li>
+          <li><strong>APIs RPC completas</strong> &mdash; Accede a toda la funcionalidad de Kron a traves de su interfaz JSON-RPC. Ideal para wallets, exploradores, exchanges y cualquier tipo de dApp.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="dev-code">
+          <pre><span class="cm">// Ejemplo: emitir un activo + metadata IPFS</span>
+<span class="kw">const</span> tx = <span class="kw">await</span> rpc.<span class="fn">issue</span>({
+  <span class="kw">name</span>:        <span class="str">"MISUPERTOKEN"</span>,
+  <span class="kw">quantity</span>:    <span class="str">1000000</span>,
+  <span class="kw">ipfs_hash</span>:   <span class="str">"QmX...abc"</span>,
+  <span class="kw">description</span>: <span class="str">"Mi primer token en Kron"</span>
+});
+
+<span class="cm">// Ejemplo: enviar mensaje en canal</span>
+<span class="kw">await</span> rpc.<span class="fn">sendmessage</span>({
+  <span class="kw">channel</span>:   <span class="str">"MICANAL~"</span>,
+  <span class="kw">message</span>:   <span class="str">"Hola comunidad!"</span>,
+  <span class="kw">ipfs_hash</span>: <span class="str">"QmY...xyz"</span>
+});
+
+<span class="cm">// Ejemplo: consultar activos</span>
+<span class="kw">const</span> assets = <span class="kw">await</span> rpc.<span class="fn">listassets</span>({
+  <span class="kw">asset</span>: <span class="str">"MISUPERTOKEN"</span>
+});</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="section-inner">
+    <p>Kron Core &mdash; construyendo infraestructura descentralizada desde 2017.</p>
+    <div class="links">
+      <a href="#">Inicio</a>
+      <a href="#mineria">Mineria</a>
+      <a href="#caracteristicas">Caracteristicas</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#ecosistema">Ecosistema</a>
+      <a href="#desarrolladores">Desarrolladores</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+      var open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
     });
-  </script>
+
+    document.querySelectorAll('[data-nav]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+      });
+    });
+  }
+
+  var header = document.getElementById('header');
+  if (header) {
+    window.addEventListener('scroll', function() {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  }
+
+  var revealElements = document.querySelectorAll('.reveal');
+  if (revealElements.length) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealElements.forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
