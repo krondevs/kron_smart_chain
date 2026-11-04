@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kron — La blockchain de nueva generacion</title>
+<meta name="description" content="Kron Smart Chain (KSC): cadena independiente derivada de Qtum Core con UTXO + EVM, PoS, bloques de ~12 s y tokens KRC20/QRC20. Chain ID 2026.">
+<title>Kron Smart Chain — UTXO + EVM, PoS y contratos</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
@@ -23,6 +24,7 @@
   --accent3: #fd79a8;
   --green: #00cec9;
   --gold: #fdcb6e;
+  --red: #ff7675;
   --text: #e2e8f0;
   --text2: #94a3b8;
   --text3: #64748b;
@@ -51,6 +53,10 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 img, svg { max-width: 100%; display: block; }
+
+code, .mono {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+}
 
 /* ===== HEADER ===== */
 header {
@@ -86,7 +92,7 @@ header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: .55rem;
 }
 
 .logo::before {
@@ -96,6 +102,18 @@ header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
   border-radius: 7px;
   background: linear-gradient(135deg, var(--accent), var(--accent3));
   flex-shrink: 0;
+}
+
+.logo small {
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  background: rgba(108,92,231,.12);
+  border: 1px solid rgba(108,92,231,.25);
+  border-radius: 100px;
+  padding: .12rem .5rem;
 }
 
 .nav-links {
@@ -140,7 +158,7 @@ header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   .nav-toggle { display: flex; }
   .nav-links {
     position: fixed;
@@ -224,14 +242,14 @@ header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  max-width: 750px;
+  max-width: 780px;
   margin-bottom: .75rem;
 }
 
 .hero p {
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   color: var(--text2);
-  max-width: 580px;
+  max-width: 650px;
   margin-bottom: 2rem;
 }
 
@@ -332,7 +350,7 @@ section { padding: 4rem 1.25rem; }
 .section-sub {
   color: var(--text2);
   font-size: 1rem;
-  max-width: 650px;
+  max-width: 700px;
   margin-bottom: 2.5rem;
 }
 
@@ -372,7 +390,7 @@ section { padding: 4rem 1.25rem; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: .95rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -394,9 +412,82 @@ section { padding: 4rem 1.25rem; }
 .icon-pink   { background: rgba(253,121,168,.12); color: var(--accent3); }
 .icon-gold   { background: rgba(253,203,110,.12); color: var(--gold); }
 
-/* ===== MINING SECTION ===== */
-#mineria { background: var(--bg2); }
+/* ===== PARAMETERS ===== */
+#red,
+#economia,
+#desarrolladores { background: var(--bg2); }
 
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .split { grid-template-columns: 1fr 1fr; }
+  #desarrolladores .split { align-items: center; }
+}
+
+.params-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-size: .86rem;
+}
+
+.params-table th,
+.params-table td {
+  padding: .7rem .9rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.params-table tr:last-child th,
+.params-table tr:last-child td { border-bottom: none; }
+
+.params-table th {
+  color: var(--text3);
+  font-weight: 500;
+  width: 46%;
+}
+
+.params-table td {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.params-table td .mono { color: var(--accent2); font-weight: 500; }
+
+.genesis-box {
+  background: linear-gradient(135deg, rgba(108,92,231,.1), rgba(0,206,201,.06));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.genesis-box .label {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent2);
+  margin-bottom: .4rem;
+}
+
+.genesis-box code {
+  display: block;
+  font-size: .78rem;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+/* ===== CARDS / CONSENSUS ===== */
 .mining-highlight {
   background: linear-gradient(135deg, rgba(108,92,231,.1), rgba(0,206,201,.06));
   border: 1px solid var(--border);
@@ -415,7 +506,7 @@ section { padding: 4rem 1.25rem; }
 
 .mining-highlight p {
   color: var(--text2);
-  max-width: 550px;
+  max-width: 680px;
   margin: 0 auto;
   font-size: .92rem;
 }
@@ -443,8 +534,10 @@ section { padding: 4rem 1.25rem; }
 }
 
 .mining-card .icon {
-  font-size: 1.5rem;
-  margin-bottom: .5rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--accent2);
+  margin-bottom: .4rem;
 }
 
 .mining-card h4 {
@@ -458,9 +551,16 @@ section { padding: 4rem 1.25rem; }
   color: var(--text3);
 }
 
-/* ===== TOKENOMICS ===== */
-#tokenomics { background: var(--bg2); }
+.note {
+  margin-top: 1.5rem;
+  font-size: .85rem;
+  color: var(--text3);
+  line-height: 1.7;
+}
 
+.note strong { color: var(--text2); }
+
+/* ===== TOKENOMICS ===== */
 .token-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -483,7 +583,7 @@ section { padding: 4rem 1.25rem; }
 .token-card:hover { border-color: rgba(108,92,231,.3); }
 
 .token-card .value {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #fff;
 }
@@ -496,11 +596,21 @@ section { padding: 4rem 1.25rem; }
   margin-top: .2rem;
 }
 
-.token-note {
+.supply-box {
   margin-top: 1.5rem;
-  font-size: .85rem;
-  color: var(--text3);
-  text-align: center;
+  background: #0d0f1a;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.4rem;
+  overflow-x: auto;
+}
+
+.supply-box pre {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: .8rem;
+  line-height: 1.7;
+  color: var(--text2);
+  white-space: pre;
 }
 
 /* ===== ECOSYSTEM ===== */
@@ -537,6 +647,51 @@ section { padding: 4rem 1.25rem; }
   line-height: 1.65;
 }
 
+/* ===== STATUS ===== */
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
+}
+
+@media (min-width: 700px) {
+  .status-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.status-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1rem;
+}
+
+.status-card .value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.status-card .label {
+  font-size: .72rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: .15rem;
+}
+
+.warning {
+  margin-top: 1.5rem;
+  border: 1px solid rgba(255,118,117,.25);
+  background: rgba(255,118,117,.07);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.2rem;
+  font-size: .85rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+.warning strong { color: var(--red); }
+
 /* ===== CTA ===== */
 .cta {
   text-align: center;
@@ -553,17 +708,20 @@ section { padding: 4rem 1.25rem; }
 
 .cta p {
   color: var(--text2);
-  max-width: 520px;
+  max-width: 560px;
   margin: 0 auto 1.5rem;
   font-size: .95rem;
 }
 
-/* ===== DEVELOPERS ===== */
-#desarrolladores {
-  background: var(--bg2);
-  position: relative;
-  isolation: isolate;
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;
 }
+
+/* ===== DEVELOPERS ===== */
+#desarrolladores { position: relative; isolation: isolate; }
 
 #desarrolladores::before {
   content: '';
@@ -571,18 +729,6 @@ section { padding: 4rem 1.25rem; }
   inset: 0;
   background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(0,206,201,.04), transparent 70%);
   z-index: -1;
-}
-
-.split {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-@media (min-width: 768px) {
-  .split { grid-template-columns: 1fr 1fr; }
-  #desarrolladores .split { align-items: center; }
 }
 
 .dev-features {
@@ -679,9 +825,17 @@ footer .links a:hover { color: #fff; }
   transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-badge::before { animation: none; }
+}
+
 /* ===== RESPONSIVE HELPERS ===== */
 @media (max-width: 480px) {
-  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-actions .btn,
+  .cta-actions .btn { width: 100%; justify-content: center; }
+  .logo small { display: none; }
 }
 </style>
 </head>
@@ -689,160 +843,260 @@ footer .links a:hover { color: #fff; }
 
 <header id="header">
   <div class="header-inner">
-    <a href="#" class="logo">Kron</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <a href="#inicio" class="logo">Kron <small>Smart Chain</small></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#mineria" data-nav>Mineria</a></li>
-      <li><a href="#caracteristicas" data-nav>Caracteristicas</a></li>
-      <li><a href="#tokenomics" data-nav>Tokenomics</a></li>
-      <li><a href="#ecosistema" data-nav>Ecosistema</a></li>
+      <li><a href="#red" data-nav>Red</a></li>
+      <li><a href="#staking" data-nav>Staking</a></li>
+      <li><a href="#caracteristicas" data-nav>Características</a></li>
+      <li><a href="#economia" data-nav>Economía</a></li>
       <li><a href="#desarrolladores" data-nav>Desarrolladores</a></li>
     </ul>
   </div>
 </header>
 
 <section class="hero" id="inicio">
-  <div class="hero-badge">Red activa &middot; 1 min por bloque</div>
-  <h1>La blockchain donde tus ideas cobran vida</h1>
-  <p>Kron es una plataforma descentralizada con activos nativos, mensajeria, votacion, NFTs y mineria automatica por CPU. Sin ASICs, sin staking.</p>
+  <div class="hero-badge">Mainnet v1.0.0 &middot; bloques de ~12 s desde el 5085</div>
+  <h1>Una cadena independiente con UTXO + EVM</h1>
+  <p>Kron Smart Chain (KSC) es un fork independiente de Qtum Core. Conserva la EVM, el modelo UTXO y el estándar QRC20, pero tiene su propio génesis, su propia red PoS y su propio chain ID&nbsp;2026.</p>
   <div class="hero-actions">
-    <a href="https://github.com/krondevs/kron_smart_chain/releases/tag/4.3.2" class="btn btn-primary" target="_blank" rel="noopener">Descargar Wallet</a>
-    <a href="#mineria" class="btn btn-outline">Como minar</a>
+    <a href="releases/kron-1.0.0_linux/KronSmartChain-1.0.0-x86_64.AppImage" class="btn btn-primary" download>Descargar billetera</a>
+    <a href="#red" class="btn btn-outline">Parámetros de red</a>
     <a href="#desarrolladores" class="btn btn-outline">Desarrolladores</a>
   </div>
   <div class="hero-stats">
-    <div><span>108M</span><label>Suministro total</label></div>
-    <div><span>1 min</span><label>Tiempo de bloque</label></div>
-    <div><span>0.1 KRON</span><label>Recompensa fija</label></div>
-    <div><span>CPU</span><label>Mineria sin ASIC</label></div>
+    <div><span>100 000 604</span><label>KSC en el snapshot</label></div>
+    <div><span>~12 s</span><label>Tiempo de bloque</label></div>
+    <div><span>0.5 KSC</span><label>Subsidio por bloque</label></div>
+    <div><span>2026</span><label>Chain ID EVM</label></div>
   </div>
 </section>
 
-<section id="mineria">
+<section id="red">
   <div class="section-inner">
-    <span class="section-label">Mineria</span>
-    <h2 class="section-title">La unica blockchain que mina sola</h2>
-    <p class="section-sub">Kron incorpora un sistema de mineria automatica programada. Solo ejecutas el nodo y el genera bloques por ti. No necesitas ASICs, GPUs ni hacer staking.</p>
+    <span class="section-label">Red</span>
+    <h2 class="section-title">Una red propia, no un token sobre Qtum</h2>
+    <p class="section-sub">KSC opera con su propio génesis, magic de red, puertos, prefijos de dirección y cadena EVM. Las direcciones y contratos de Qtum mainnet no existen en Kron: cada contrato debe desplegarse en esta cadena.</p>
+
+    <div class="split">
+      <div>
+        <table class="params-table">
+          <tbody>
+            <tr><th>Puerto P2P</th><td><span class="mono">20888</span></td></tr>
+            <tr><th>Puerto RPC</th><td><span class="mono">20889</span></td></tr>
+            <tr><th>Puerto Tor</th><td><span class="mono">20891</span></td></tr>
+            <tr><th>Magic P2P</th><td><span class="mono">KRON</span></td></tr>
+            <tr><th>P2PKH</th><td><span class="mono">45</span> → <span class="mono">K...</span></td></tr>
+            <tr><th>P2SH</th><td><span class="mono">63</span> → <span class="mono">S...</span></td></tr>
+            <tr><th>Bech32</th><td><span class="mono">kron1...</span></td></tr>
+            <tr><th>WIF</th><td><span class="mono">128</span></td></tr>
+            <tr><th>Chain ID EVM</th><td><span class="mono">2026</span></td></tr>
+            <tr><th>Datadir</th><td><span class="mono">~/.kron</span></td></tr>
+            <tr><th>Configuración</th><td><span class="mono">~/.kron/kron.conf</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="dev-code">
+          <pre><span class="cm"># Iniciar un nodo mainnet</span>
+./bin/<span class="fn">krond</span> -daemon
+
+<span class="cm"># Consultar la cadena y los peers</span>
+./bin/<span class="fn">kron-cli</span> getblockchaininfo
+./bin/<span class="fn">kron-cli</span> getpeerinfo
+
+<span class="cm"># Seeds mainnet hardcodeados</span>
+<span class="cm"># 162.35.99.111</span>
+<span class="cm"># ksc.glob.qzz.io</span>
+<span class="cm"># (dos direcciones .onion)</span>
+
+<span class="cm"># Para usar seeds .onion, configurar Tor</span>
+<span class="cm"># en kron.conf:</span>
+onion=127.0.0.1:9050</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="genesis-box">
+      <div class="label">Génesis mainnet</div>
+      <code>00003cc638750628bca7fac735888a303e7c87cf198f5611af57e48f0b4f1688</code>
+    </div>
+  </div>
+</section>
+
+<section id="staking">
+  <div class="section-inner">
+    <span class="section-label">Consenso</span>
+    <h2 class="section-title">PoW de arranque, PoS desde el bloque 5001</h2>
+    <p class="section-sub">La cadena arrancó el 2026-11-03 con una fase PoW de 5000 bloques. Desde el bloque 5001 funciona con proof of stake mediante coinstake. En el bloque 5085 se activó un hard fork que aceleró la red.</p>
 
     <div class="mining-highlight">
-      <h3>Como funciona</h3>
-      <p>Descargas el wallet, lo enciendes y Kron genera bloques automaticamente en intervalos programados. Tu CPU hace el trabajo de forma optimizada y predecible. La red se mantiene activa sin intervencion manual.</p>
+      <h3>Fast fork en el bloque 5085</h3>
+      <p>El tiempo objetivo pasó de 128 s a 12 s, la madurez de monedas de 500 a 100 bloques y el subsidio de 4 KSC a 0.5 KSC por bloque. Es un hard fork de consenso: no cambia el génesis ni el historial, pero todos los nodos deben actualizarse.</p>
     </div>
 
     <div class="mining-grid">
       <div class="mining-card">
-        <div class="icon">&#9889;</div>
-        <h4>Sin ASICs</h4>
-        <p>No necesitas hardware especializado. Cualquier CPU funcionando puede generar bloques.</p>
+        <div class="icon">PoS</div>
+        <h4>Coinstake</h4>
+        <p>Los stakers buscan kernels sobre slots de timestamp de 4 s. El coinstake paga la recompensa del bloque.</p>
       </div>
       <div class="mining-card">
-        <div class="icon">&#9851;</div>
-        <h4>Sin staking</h4>
-        <p>No tienes que bloquear fondos ni hacer staking. Solo mantener el nodo activo.</p>
+        <div class="icon">12 s</div>
+        <h4>Bloques rápidos</h4>
+        <p>Objetivo de 12 s desde el bloque 5085. Antes de ese fork el objetivo era de 128 s.</p>
       </div>
       <div class="mining-card">
-        <div class="icon">&#9203;</div>
-        <h4>Generacion automatica</h4>
-        <p>El nodo genera bloques de forma programada y autonoma. No requiere comandos manuales.</p>
+        <div class="icon">100</div>
+        <h4>Madurez</h4>
+        <p>100 bloques para monedas generadas desde 5085; antes eran 500. A 12 s equivale a ~20 minutos.</p>
       </div>
       <div class="mining-card">
-        <div class="icon">&#9981;</div>
-        <h4>Recompensa constante</h4>
-        <p>0.1 KRON por bloque, siempre. Sin halving, sin reducciones. Predecible y sostenible.</p>
+        <div class="icon">0.5</div>
+        <h4>Subsidio</h4>
+        <p>0.5 KSC por bloque desde 5085, más las comisiones. Antes del fork eran 4 KSC por bloque.</p>
       </div>
     </div>
+
+    <p class="note"><strong>Staking real:</strong> se necesita una billetera desbloqueada, monedas maduras, peers y peso suficiente. <code>getstakinginfo</code> expone <code>staking</code>, <code>weight</code>, <code>netstakeweight</code>, <code>expectedtime</code> y <code>errors</code>. Las recompensas de coinstake se muestran como <strong>Staked</strong>; los bloques PoW históricos, como <strong>Mined</strong>. El offline staking y las delegaciones están previstos para la altura 680000 y todavía no están activos.</p>
   </div>
 </section>
 
 <section id="caracteristicas">
   <div class="section-inner">
-    <span class="section-label">Caracteristicas</span>
-    <h2 class="section-title">Todo lo que necesitas en una sola cadena</h2>
-    <p class="section-sub">Kron no es solo una criptomoneda. Es un ecosistema completo listo para usar, sin contratos complejos ni capas adicionales.</p>
+    <span class="section-label">Características</span>
+    <h2 class="section-title">Todo lo que hereda de Qtum, con identidad propia</h2>
+    <p class="section-sub">KSC no es una cadena EVM nueva desde cero: reutiliza la arquitectura híbrida de Qtum y la adapta a su propia red. Estos son los componentes que sí están implementados en el cliente v1.0.0.</p>
+
     <div class="features-grid">
       <div class="feature-card reveal">
-        <div class="feature-icon icon-purple">##</div>
-        <h3>Activos Nativos</h3>
-        <p>Crea tus propios tokens en segundos. La red entiende los activos a nivel de protocolo: no se pierden en transacciones comunes.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon icon-pink">NT</div>
-        <h3>NFTs Unicos</h3>
-        <p>Emite activos unicos no fungibles (NFTs)de forma nativa. Perfecto para arte digital, coleccionables, certificados y mas.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon icon-green">MS</div>
-        <h3>Mensajeria Desc.</h3>
-        <p>Chatea de forma descentralizada a traves de canales sobre la blockchain. Los mensajes viajan con la red, no por servidores.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon icon-gold">VT</div>
-        <h3>Votacion On-chain</h3>
-        <p>Sistema de votacion nativo con tokens de voto distribuidos 1:1. Democracia liquida y delegacion incluida.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon icon-purple">%</div>
-        <h3>Recompensas y Dividendos</h3>
-        <p>Distribuye pagos a todos los poseedores de un activo de forma automatica. Ideal para proyectos que premiaran a su comunidad.</p>
+        <div class="feature-icon icon-purple">UTXO</div>
+        <h3>UTXO + EVM</h3>
+        <p>Dos capas de estado: un conjunto UTXO para las monedas y una cadena EVM para cuentas, contratos, almacenamiento, logs y recibos.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon icon-green">&lt;&gt;</div>
-        <h3>IPFS Nativo</h3>
-        <p>Almacena metadatos, documentos e imagenes en IPFS directamente desde la blockchain. Tus datos son inmutables y descentralizados.</p>
+        <h3>Contratos EVM</h3>
+        <p>Desplegá y ejecutá contratos con la EVM de Qtum. Los forks modernos (Muir Glacier, London, Shanghai, Cancun y Pectra) se activan desde el bloque 2000.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-pink">KRC</div>
+        <h3>KRC20 / QRC20</h3>
+        <p>KRC20 es el alias de marca de KSC para QRC20. Los RPC <code>krc20*</code> y <code>qrc20*</code> coexisten; el ABI, los selectores y los eventos no cambian.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-gold">RPC</div>
+        <h3>JSON-RPC completo</h3>
+        <p>Accedé a toda la cadena desde <code>kron-cli</code> o JSON-RPC: blockchain, wallet, staking, contratos, logs y consultas de tokens.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-green">TOR</div>
+        <h3>Soporte Tor</h3>
+        <p>La red publica seeds <code>.onion</code> y permite configurar un proxy Tor para conectar sin exponer la IP. El tráfico P2P viaja por la red Kron.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-purple">MP</div>
+        <h3>Multi-PoS</h3>
+        <p>La ventana multi-PoS va del bloque 5510 al 679999, con 10 destinatarios por bloque. El offline staking llega en la altura 680000.</p>
       </div>
     </div>
+
+    <p class="note"><strong>Alcance:</strong> QRC721 no está implementado en este cliente. Tampoco hay mensajería, votación on-chain, NFTs ni dividendos automáticos como funciones nativas. Lo que existe es UTXO + EVM + QRC20/KRC20 + staking.</p>
   </div>
 </section>
 
-<section id="tokenomics">
+<section id="economia">
   <div class="section-inner">
-    <span class="section-label">Tokenomics</span>
-    <h2 class="section-title">Economia de Kron (KRON)</h2>
-    <p class="section-sub">El token nativo KRON es el combustible de la red. Con suministro limitado y emision constante, esta disenado para ser sostenible a largo plazo sin inflacion descontrolada.</p>
+    <span class="section-label">Economía</span>
+    <h2 class="section-title">Emisión determinista de KSC</h2>
+    <p class="section-sub">No hay ICO, preventa ni premine en el código. La distribución inicial fue la fase PoW; desde entonces, las recompensas van a los stakers que producen bloques.</p>
+
     <div class="token-cards">
       <div class="token-card reveal">
-        <div class="value">108 000 000</div>
-        <div class="label">Suministro maximo</div>
+        <div class="value">100 000 000</div>
+        <div class="label">KSC emitidos en PoW</div>
       </div>
       <div class="token-card reveal">
-        <div class="value">0.1 KRON</div>
-        <div class="label">Recompensa por bloque</div>
+        <div class="value">0.5 KSC</div>
+        <div class="label">Subsidio desde 5085</div>
       </div>
       <div class="token-card reveal">
-        <div class="value">100 KRON</div>
-        <div class="label">Bonus c/2000 bloques</div>
+        <div class="value">10 512 000</div>
+        <div class="label">Bloques por halving (~4 años)</div>
       </div>
       <div class="token-card reveal">
-        <div class="value">Fijo</div>
-        <div class="label">Sin halving</div>
+        <div class="value">100 000 604</div>
+        <div class="label">Suministro en el snapshot</div>
       </div>
     </div>
-    <p class="token-note">La recompensa por bloque se mantiene constante en 0.1 KRON de forma permanente. No hay halving programado. Cada 2000 bloques se entrega un bonus de 100 KRON. Suministro maximo: 108 millones de KRON.</p>
+
+    <div class="supply-box">
+      <pre><span class="cm"># Suministro determinista sin fees (H = altura actual)</span>
+100 000 000                  <span class="cm"># 5000 bloques PoW × 20 000 KSC</span>
++ 84 × 4                     <span class="cm"># bloques 5001–5084 × 4 KSC</span>
++ (H − 5084) × 0.5           <span class="cm"># desde 5085, 0.5 KSC por bloque</span>
+
+<span class="cm"># En el snapshot H = 5621:</span>
+≈ 100 000 604.5 KSC          <span class="cm"># el nodo reporta 100 000 604 KSC</span></pre>
+    </div>
+
+    <p class="note"><strong>Halving:</strong> <code>nSubsidyHalvingIntervalV2 = 10 512 000</code> bloques. A 12 s por bloque equivalen a ~4 años. La primera era paga 0.5 KSC por bloque; después 0.25, 0.125 y así sucesivamente. <strong>Comisiones:</strong> política estilo Qtum; en el snapshot <code>minrelaytxfee = 0.004 KSC/kvB</code>. El suministro y la altura cambian con la red: las cifras son un snapshot del 2026-11-04.</p>
+  </div>
+</section>
+
+<section id="estado">
+  <div class="section-inner">
+    <span class="section-label">Estado</span>
+    <h2 class="section-title">Red joven, en fase temprana de pruebas</h2>
+    <p class="section-sub">Estos valores corresponden al snapshot del 2026-11-04 y cambian con el tiempo. La red todavía no tiene auditoría formal, listados públicos ni garantías de liquidez.</p>
+
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="value">5621</div>
+        <div class="label">Altura del snapshot</div>
+      </div>
+      <div class="status-card">
+        <div class="value">2</div>
+        <div class="label">Peers conectados</div>
+      </div>
+      <div class="status-card">
+        <div class="value">Activo</div>
+        <div class="label">Staking</div>
+      </div>
+      <div class="status-card">
+        <div class="value">~696 090</div>
+        <div class="label">Dificultad</div>
+      </div>
+    </div>
+
+    <div class="warning">
+      <strong>Experimental:</strong> pocos nodos y stakers, seeds hardcodeados y finalidad probabilística. Si el staker principal se cae, puede haber pausas largas aunque el objetivo sea de 12 s. Verificá los hashes de los binarios con <code>SHA256SUMS</code>, usá nodos propios y hacé backups de la billetera. Esto no es asesoría financiera.
+    </div>
   </div>
 </section>
 
 <section id="ecosistema">
   <div class="section-inner">
     <span class="section-label">Ecosistema</span>
-    <h2 class="section-title">Construido para personas, empresas y comunidades</h2>
+    <h2 class="section-title">Para quién es Kron Smart Chain</h2>
     <div class="use-grid">
       <div class="use-card reveal">
-        <h3>Comunidades descentralizadas</h3>
-        <p>Crea tu propio token comunitario, establece canales de mensajeria segura y organiza votaciones transparentes. Todo sin depender de terceros ni plataformas centralizadas.</p>
+        <h3>Desarrolladores EVM</h3>
+        <p>Desplegá contratos Solidity sobre una EVM compatible con Qtum, con chain ID 2026 y forks modernos activos. Podés usar las RPC nativas para integraciones y automatización.</p>
       </div>
       <div class="use-card reveal">
-        <h3>Inversionistas</h3>
-        <p>Adquiere KRON y participa en la red. La mineria automatica por CPU significa que cualquiera puede contribuir y obtener recompensas. Suministro limitado a 108 millones.</p>
+        <h3>Emisores de tokens</h3>
+        <p>Creá tokens QRC20 y consultalos con las RPC <code>krc20*</code>. El ABI y los eventos son los mismos que en Qtum, así que las herramientas existentes siguen funcionando.</p>
       </div>
       <div class="use-card reveal">
-        <h3>Creadores y artistas</h3>
-        <p>Tokeniza tu obra como NFT unico, define regalias y vende directamente a tu audiencia sin intermediarios. Los metadatos se almacenan en IPFS.</p>
+        <h3>Stakers y operadores</h3>
+        <p>Mantené un nodo con la billetera desbloqueada, monedas maduras y peers para participar del consenso PoS. <code>getstakinginfo</code> te muestra peso y tiempo esperado.</p>
       </div>
       <div class="use-card reveal">
-        <h3>Proyectos y startups</h3>
-        <p>Emite tokens para financiamiento colectivo, distribuye dividendos a tus inversores y gobierna tu proyecto con votaciones on-chain. Todo desde el wallet.</p>
+        <h3>Integradores</h3>
+        <p>Construí exploradores, wallets o servicios sobre JSON-RPC. La cadena expone bloques, transacciones, recibos, logs, estado EVM y consultas de tokens.</p>
       </div>
     </div>
   </div>
@@ -850,49 +1104,52 @@ footer .links a:hover { color: #fff; }
 
 <section class="cta">
   <div class="section-inner">
-    <h2>Listo para construir el futuro descentralizado?</h2>
-    <p>Unete a la red Kron, crea activos, envia mensajes y participa en una economia digital sin fronteras. Sin ASICs, sin staking, solo tu nodo.</p>
-    <a href="#desarrolladores" class="btn btn-primary">Comenzar a construir</a>
+    <h2>Descargá Kron Smart Chain Core v1.0.0</h2>
+    <p>Binarios estáticos para Linux x86_64, paquete para Windows y código fuente. La GUI se distribuye como AppImage portable con Qt6 incluido.</p>
+    <div class="cta-actions">
+      <a href="releases/kron-1.0.0_linux/KronSmartChain-1.0.0-x86_64.AppImage" class="btn btn-primary" download>Linux AppImage</a>
+      <a href="releases/kron-1.0.0-win64.zip" class="btn btn-outline" download>Windows x64</a>
+      <a href="releases/kron-1.0.0_linux/SHA256SUMS" class="btn btn-outline">SHA256SUMS</a>
+    </div>
   </div>
 </section>
 
 <section id="desarrolladores">
   <div class="section-inner">
     <span class="section-label">Desarrolladores</span>
-    <h2 class="section-title">Construye sobre Kron</h2>
+    <h2 class="section-title">Construí sobre la EVM de Kron</h2>
     <div class="split">
       <div>
-        <p style="color:var(--text2);font-size:.95rem;line-height:1.7">Kron es una plataforma abierta para desarrolladores. Puedes construir aplicaciones descentralizadas (dApps) en una capa encima de la blockchain aprovechando sus capacidades unicas:</p>
+        <p style="color:var(--text2);font-size:.95rem;line-height:1.7">KSC expone la arquitectura de Qtum Core con su propia identidad de red. Podés desplegar contratos, emitir tokens y consultar el estado de la cadena desde la CLI o JSON-RPC:</p>
         <ul class="dev-features">
-          <li><strong>Integracion nativa con IPFS</strong> &mdash; Almacena metadatos, documentos, imagenes y cualquier archivo en IPFS y ancla su hash en la cadena. Tus datos son inmutables y descentralizados.</li>
-          <li><strong>Datos en transacciones</strong> &mdash; Cada transaccion puede incluir metadatos arbitrarios e hashes IPFS. Esto te permite construir aplicaciones de capa 2 sin necesidad de contratos inteligentes complejos.</li>
-          <li><strong>Activos programables</strong> &mdash; Emite tokens, NFTs, activos restringidos (KYC) y canales de mensajeria desde tu app usando las RPCs nativas de Kron.</li>
-          <li><strong>Mensajeria descentralizada</strong> &mdash; Integra chat y notificaciones on-chain en tu aplicacion. Los mensajes viajan con la red, no por servidores centralizados.</li>
-          <li><strong>APIs RPC completas</strong> &mdash; Accede a toda la funcionalidad de Kron a traves de su interfaz JSON-RPC. Ideal para wallets, exploradores, exchanges y cualquier tipo de dApp.</li>
+          <li><strong>EVM compatible con Qtum</strong> &mdash; Chain ID <code>2026</code> en mainnet, <code>2027</code> en testnet y <code>2028</code> en regtest. Los forks modernos se activan desde el bloque 2000.</li>
+          <li><strong>Contratos y llamadas</strong> &mdash; Usá <code>createcontract</code>, <code>sendtocontract</code>, <code>callcontract</code>, <code>gettransactionreceipt</code> y <code>searchlogs</code> para el ciclo completo de un contrato.</li>
+          <li><strong>QRC20 y KRC20</strong> &mdash; Todas las RPC <code>qrc20*</code> tienen alias <code>krc20*</code>. El estándar on-chain es el mismo: <code>name</code>, <code>symbol</code>, <code>totalSupply</code>, <code>transfer</code>, <code>approve</code>, <code>burn</code> y eventos <code>Transfer</code>/<code>Approval</code>.</li>
+          <li><strong>UTXO + EVM</strong> &mdash; Transferencias UTXO, llamadas a contratos, creación de contratos y coinstakes conviven en la misma cadena.</li>
+          <li><strong>Red y herramientas</strong> &mdash; <code>krond</code>, <code>kron-cli</code>, <code>kron-qt</code>, <code>kron-tx</code>, <code>kron-util</code> y <code>kron-wallet</code>. Build reproducible con CMake y artefactos estáticos musl.</li>
         </ul>
       </div>
       <div>
         <div class="dev-code">
-          <pre><span class="cm">// Ejemplo: emitir un activo + metadata IPFS</span>
-<span class="kw">const</span> tx = <span class="kw">await</span> rpc.<span class="fn">issue</span>({
-  <span class="kw">name</span>:        <span class="str">"MISUPERTOKEN"</span>,
-  <span class="kw">quantity</span>:    <span class="str">1000000</span>,
-  <span class="kw">ipfs_hash</span>:   <span class="str">"QmX...abc"</span>,
-  <span class="kw">description</span>: <span class="str">"Mi primer token en Kron"</span>
-});
+          <pre><span class="cm"># Estado de la cadena y staking</span>
+kron-cli getblockchaininfo
+kron-cli getstakinginfo
+kron-cli getpeerinfo
 
-<span class="cm">// Ejemplo: enviar mensaje en canal</span>
-<span class="kw">await</span> rpc.<span class="fn">sendmessage</span>({
-  <span class="kw">channel</span>:   <span class="str">"MICANAL~"</span>,
-  <span class="kw">message</span>:   <span class="str">"Hola comunidad!"</span>,
-  <span class="kw">ipfs_hash</span>: <span class="str">"QmY...xyz"</span>
-});
+<span class="cm"># Contratos EVM</span>
+kron-cli createcontract <span class="str">"&lt;bytecode&gt;"</span>
+kron-cli callcontract <span class="str">"&lt;contract&gt;"</span> <span class="str">"&lt;data&gt;"</span>
+kron-cli sendtocontract <span class="str">"&lt;contract&gt;"</span> <span class="str">"&lt;data&gt;"</span> <span class="str">&lt;amount&gt;</span>
 
-<span class="cm">// Ejemplo: consultar activos</span>
-<span class="kw">const</span> assets = <span class="kw">await</span> rpc.<span class="fn">listassets</span>({
-  <span class="kw">asset</span>: <span class="str">"MISUPERTOKEN"</span>
-});</pre>
+<span class="cm"># Tokens KRC20 (alias de QRC20)</span>
+kron-cli krc20name <span class="str">"&lt;contract&gt;"</span>
+kron-cli qrc20name <span class="str">"&lt;contract&gt;"</span>   <span class="cm"># compatibilidad</span>
+
+<span class="cm"># Recibos y logs</span>
+kron-cli gettransactionreceipt <span class="str">"&lt;txid&gt;"</span>
+kron-cli searchlogs <span class="str">&lt;fromBlock&gt;</span> <span class="str">&lt;toBlock&gt;</span></pre>
         </div>
+        <p class="note">Documentación técnica completa en <a href="WHITEPAPER.md" style="color:var(--accent2)">WHITEPAPER.md</a> y <a href="README.md" style="color:var(--accent2)">README.md</a>.</p>
       </div>
     </div>
   </div>
@@ -900,14 +1157,15 @@ footer .links a:hover { color: #fff; }
 
 <footer>
   <div class="section-inner">
-    <p>Kron Core &mdash; construyendo infraestructura descentralizada desde 2017.</p>
+    <p>Kron Smart Chain Core v1.0.0 &mdash; fork independiente de Qtum Core. Licencia MIT.</p>
     <div class="links">
-      <a href="#">Inicio</a>
-      <a href="#mineria">Mineria</a>
-      <a href="#caracteristicas">Caracteristicas</a>
-      <a href="#tokenomics">Tokenomics</a>
-      <a href="#ecosistema">Ecosistema</a>
+      <a href="#inicio">Inicio</a>
+      <a href="#red">Red</a>
+      <a href="#staking">Staking</a>
+      <a href="#caracteristicas">Características</a>
+      <a href="#economia">Economía</a>
       <a href="#desarrolladores">Desarrolladores</a>
+      <a href="releases/">Descargas</a>
     </div>
   </div>
 </footer>
@@ -923,12 +1181,14 @@ footer .links a:hover { color: #fff; }
     navToggle.addEventListener('click', function() {
       var open = navLinks.classList.toggle('open');
       navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
     document.querySelectorAll('[data-nav]').forEach(function(link) {
       link.addEventListener('click', function() {
         navLinks.classList.remove('open');
         navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
@@ -941,7 +1201,7 @@ footer .links a:hover { color: #fff; }
   }
 
   var revealElements = document.querySelectorAll('.reveal');
-  if (revealElements.length) {
+  if (revealElements.length && 'IntersectionObserver' in window) {
     var revealObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
@@ -954,6 +1214,8 @@ footer .links a:hover { color: #fff; }
     revealElements.forEach(function(el) {
       revealObserver.observe(el);
     });
+  } else {
+    revealElements.forEach(function(el) { el.classList.add('visible'); });
   }
 })();
 </script>
